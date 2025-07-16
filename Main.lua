@@ -1,18 +1,23 @@
 local messages = {
-    "GUI is unavailable. Please touch grass instead \n- DConroyN",
+    "GUI is unavailable. Please touch grass instead 🌱\n- DConroyN",
     "You really tried to run this?\nLMAO. DConroyN shut it down.",
     "We cleaned up this mess for you.\nYou're welcome - DConroyN",
-    "Oops! Looks like your favorite GUI took an L...\nClosed by DConroyN "
+    "Oops! Looks like your favorite GUI took an L...\nClosed by DConroyN 😎"
 }
 
 local message = messages[math.random(1, #messages)]
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer or Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+local PlayerGui = player:WaitForChild("PlayerGui")
 
 -- GUI
 local gui = Instance.new("ScreenGui")
 gui.Name = "DConroyNTrollGui"
 gui.ResetOnSpawn = false
 gui.IgnoreGuiInset = true
-gui.Parent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.Parent = PlayerGui
 
 -- Frame
 local frame = Instance.new("Frame")
@@ -34,17 +39,5 @@ label.TextSize = 22
 label.TextWrapped = true
 label.TextXAlignment = Enum.TextXAlignment.Center
 label.TextYAlignment = Enum.TextYAlignment.Center
-label.Text = "Checking GUI status..."
+label.Text = message
 label.Parent = frame
-
--- Kontrol: Eski c00lgui hâlâ çalışıyor mu?
-local success, result = pcall(function()
-	return game:HttpGet("https://raw.githubusercontent.com/cfsmi2/c00lguiv1/refs/heads/main/Main.lua")
-end)
-
-if success and result and #result > 10 then
-	label.Text = "This GUI is still online... 😒"
-	label.TextColor3 = Color3.fromRGB(255, 255, 100)
-else
-	label.Text = message
-end
