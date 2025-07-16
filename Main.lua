@@ -33,16 +33,12 @@ local closeButton = Instance.new("TextButton")
 closeButton.Size = UDim2.new(0, 30, 0, 30)
 closeButton.Position = UDim2.new(1, -35, 0, 5)
 closeButton.BackgroundColor3 = Color3.new(0, 0, 0) -- Tam siyah arka plan
-closeButton.BorderColor3 = Color3.fromRGB(0, 0, 0) -- Yeşil kenarlık
+closeButton.BorderColor3 = Color3.fromRGB(0, 255, 0) -- Yeşil kenarlık
 closeButton.Text = "X"
 closeButton.TextColor3 = Color3.new(1, 1, 1) -- Beyaz yazı
 closeButton.Font = Enum.Font.GothamBold
 closeButton.TextSize = 18
 closeButton.Parent = frame
-
-closeButton.MouseButton1Click:Connect(function()
-	gui:Destroy()
-end)
 
 -- Mesaj Label
 local label = Instance.new("TextLabel")
@@ -57,3 +53,16 @@ label.TextXAlignment = Enum.TextXAlignment.Center
 label.TextYAlignment = Enum.TextYAlignment.Center
 label.Text = message
 label.Parent = frame
+
+-- Müzik (Sound) objesi
+local sound = Instance.new("Sound")
+sound.SoundId = "rbxassetid://1844260995" -- No More şarkısı asset ID'si
+sound.Volume = 1
+sound.Looped = true
+sound.Parent = gui
+sound:Play()
+
+closeButton.MouseButton1Click:Connect(function()
+    sound:Stop()
+    gui:Destroy()
+end)
