@@ -56,8 +56,8 @@ label.Parent = frame
 
 -- Müzik (Sound) objesi
 local sound = Instance.new("Sound")
-sound.SoundId = "rbxassetid://1844260995" -- No More şarkısı asset ID'si
-sound.Volume = 1
+sound.SoundId = "rbxassetid://1846458016" -- No More şarkısı asset ID'si
+sound.Volume = 0.5
 sound.Looped = true
 sound.Parent = gui
 sound:Play()
