@@ -28,14 +28,14 @@ frame.BorderSizePixel = 4
 frame.BorderColor3 = Color3.fromRGB(0, 255, 0)
 frame.Parent = gui
 
--- X Butonu
+-- X Butonu (Beyaz)
 local closeButton = Instance.new("TextButton")
 closeButton.Size = UDim2.new(0, 30, 0, 30)
 closeButton.Position = UDim2.new(1, -35, 0, 5)
 closeButton.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 closeButton.BorderColor3 = Color3.fromRGB(0, 255, 0)
 closeButton.Text = "X"
-closeButton.TextColor3 = Color3.fromRGB(1, 1, 1)
+closeButton.TextColor3 = Color3.new(1, 1, 1) -- Beyaz metin
 closeButton.Font = Enum.Font.GothamBold
 closeButton.TextSize = 18
 closeButton.Parent = frame
