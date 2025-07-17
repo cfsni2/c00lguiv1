@@ -60,6 +60,38 @@ closeButton.TextSize = 20
 closeButton.ZIndex = 4
 closeButton.Parent = titleBar
 
+-- Küçült/Geri Getir Butonu
+local minimizeButton = Instance.new("TextButton")
+minimizeButton.Size = UDim2.new(0, 30, 1, 0)
+minimizeButton.Position = UDim2.new(1, -70, 0, 0)
+minimizeButton.Text = "-"
+minimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+minimizeButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+minimizeButton.BorderSizePixel = 0
+minimizeButton.Font = Enum.Font.SourceSansBold
+minimizeButton.TextSize = 20
+minimizeButton.ZIndex = 4
+minimizeButton.Parent = titleBar
+
+-- Küçült/Genişlet İşlevi
+local minimized = false
+minimizeButton.MouseButton1Click:Connect(function()
+	if minimized then
+		-- Geri getir
+		frame.Size = UDim2.new(0, 420, 0, 280)
+		label.Visible = true
+		greenLine.Visible = true
+		minimizeButton.Text = "-"
+	else
+		-- Küçült
+		frame.Size = UDim2.new(0, 420, 0, 30)
+		label.Visible = false
+		greenLine.Visible = false
+		minimizeButton.Text = "+"
+	end
+	minimized = not minimized
+end)
+
 -- Kapatma işlevi
 closeButton.MouseButton1Click:Connect(function()
 	gui:Destroy()
