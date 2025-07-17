@@ -29,19 +29,39 @@ frame.BorderSizePixel = 4
 frame.BorderColor3 = Color3.fromRGB(0, 255, 0)
 frame.Parent = gui
 
--- Title Bar (sürüklenebilir alan)
+-- Title Bar
 local titleBar = Instance.new("Frame")
 titleBar.Size = UDim2.new(1, 0, 0, 30)
 titleBar.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 titleBar.BorderSizePixel = 0
 titleBar.Parent = frame
 
--- X Butonu (title bar'a taşındı)
+-- Yeşil alt çizgi (title bar'ın altında)
+local greenLine = Instance.new("Frame")
+greenLine.Size = UDim2.new(1, 0, 0, 2)
+greenLine.Position = UDim2.new(0, 0, 1, -1)
+greenLine.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+greenLine.BorderSizePixel = 0
+greenLine.Parent = titleBar
+
+-- Başlık yazısı (sol kısım)
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, -40, 1, 0)
+titleLabel.Position = UDim2.new(0, 10, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "TheConroyGui"
+titleLabel.TextColor3 = Color3.new(1, 1, 1)
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.TextSize = 16
+titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+titleLabel.Parent = titleBar
+
+-- X Butonu
 local closeButton = Instance.new("TextButton")
 closeButton.Size = UDim2.new(0, 30, 0, 30)
 closeButton.Position = UDim2.new(1, -30, 0, 0)
 closeButton.BackgroundColor3 = Color3.new(0, 0, 0)
-closeButton.BorderColor3 = Color3.fromRGB(0, 255, 0)
+closeButton.BorderSizePixel = 0 -- BORDER YOK
 closeButton.Text = "X"
 closeButton.TextColor3 = Color3.new(1, 1, 1)
 closeButton.Font = Enum.Font.GothamBold
