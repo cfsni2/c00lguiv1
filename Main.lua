@@ -27,7 +27,7 @@ titleBar.Parent = frame
 
 -- Yeşil Alt Çizgi
 local greenLine = Instance.new("Frame")
-greenLine.Size = UDim2.new(1, 0, 0, 2)
+greenLine.Size = UDim2.new(1, 0, 0, 5)
 greenLine.Position = UDim2.new(0, 0, 0, 30)
 greenLine.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
 greenLine.BorderSizePixel = 0
