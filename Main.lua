@@ -1,119 +1,104 @@
-local messages = {
-    "GUI is unavailable. Please touch grass instead 🌱\n- DConroyN",
-    "You really tried to run this?\nLMAO. DConroyN shut it down.",
-    "We cleaned up this mess for you.\nYou're welcome - DConroyN",
-    "Oops! Looks like your favorite GUI took an L...\nClosed by DConroyN 😎"
-}
-
-local message = messages[math.random(1, #messages)]
-
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer or Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
-local PlayerGui = player:WaitForChild("PlayerGui")
-local UIS = game:GetService("UserInputService")
-
--- GUI
+local player = game.Players.LocalPlayer
 local gui = Instance.new("ScreenGui")
-gui.Name = "DConroyNTrollGui"
+gui.Name = "TrollGUI"
 gui.ResetOnSpawn = false
 gui.IgnoreGuiInset = true
-gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-gui.Parent = PlayerGui
+gui.Parent = player:WaitForChild("PlayerGui")
 
--- Frame
+-- Ana Frame
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0.5, 0, 0.35, 0)
-frame.Position = UDim2.new(0.25, 0, 0.325, 0)
-frame.BackgroundColor3 = Color3.new(0, 0, 0)
-frame.BorderSizePixel = 4
+frame.Size = UDim2.new(0, 420, 0, 280)
+frame.Position = UDim2.new(0.5, -210, 0.5, -140)
+frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+frame.BorderSizePixel = 2
 frame.BorderColor3 = Color3.fromRGB(0, 255, 0)
+frame.ZIndex = 1
+frame.Active = true
+frame.Draggable = false
 frame.Parent = gui
 
 -- Title Bar
 local titleBar = Instance.new("Frame")
 titleBar.Size = UDim2.new(1, 0, 0, 30)
-titleBar.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+titleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 titleBar.BorderSizePixel = 0
+titleBar.ZIndex = 2
 titleBar.Parent = frame
 
--- Yeşil alt çizgi (title bar'ın altında)
+-- Yeşil Alt Çizgi
 local greenLine = Instance.new("Frame")
 greenLine.Size = UDim2.new(1, 0, 0, 2)
-greenLine.Position = UDim2.new(0, 0, 1, -1)
+greenLine.Position = UDim2.new(0, 0, 0, 30)
 greenLine.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
 greenLine.BorderSizePixel = 0
-greenLine.Parent = titleBar
+greenLine.ZIndex = 3
+greenLine.Parent = frame
 
--- Başlık yazısı (sol kısım)
+-- Başlık Yazısı
 local titleLabel = Instance.new("TextLabel")
-titleLabel.Size = UDim2.new(1, -40, 1, 0)
+titleLabel.Size = UDim2.new(0, 200, 1, 0)
 titleLabel.Position = UDim2.new(0, 10, 0, 0)
 titleLabel.BackgroundTransparency = 1
 titleLabel.Text = "TheConroyGui"
-titleLabel.TextColor3 = Color3.new(1, 1, 1)
-titleLabel.Font = Enum.Font.GothamBold
-titleLabel.TextSize = 16
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+titleLabel.Font = Enum.Font.SourceSansBold
+titleLabel.TextSize = 20
+titleLabel.ZIndex = 4
 titleLabel.Parent = titleBar
 
--- X Butonu
+-- Kapatma Butonu
 local closeButton = Instance.new("TextButton")
-closeButton.Size = UDim2.new(0, 30, 0, 30)
-closeButton.Position = UDim2.new(1, -30, 0, 0)
-closeButton.BackgroundColor3 = Color3.new(0, 0, 0)
-closeButton.BorderSizePixel = 0 -- BORDER YOK
+closeButton.Size = UDim2.new(0, 30, 1, 0)
+closeButton.Position = UDim2.new(1, -35, 0, 0)
 closeButton.Text = "X"
-closeButton.TextColor3 = Color3.new(1, 1, 1)
-closeButton.Font = Enum.Font.GothamBold
-closeButton.TextSize = 18
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+closeButton.BorderSizePixel = 0
+closeButton.Font = Enum.Font.SourceSansBold
+closeButton.TextSize = 20
+closeButton.ZIndex = 4
 closeButton.Parent = titleBar
 
+-- Kapatma işlevi
 closeButton.MouseButton1Click:Connect(function()
 	gui:Destroy()
 end)
 
--- Sürükleme sistemi
+-- İçerik Label
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(1, -20, 1, -40)
+label.Position = UDim2.new(0, 10, 0, 40)
+label.BackgroundTransparency = 1
+label.Text = "Merhaba, bu bir troll GUI'dir 😎"
+label.TextColor3 = Color3.fromRGB(255, 255, 255)
+label.TextWrapped = true
+label.Font = Enum.Font.SourceSans
+label.TextSize = 20
+label.ZIndex = 2
+label.Parent = frame
+
+-- Title bar’ı sürüklenebilir yap
 local dragging = false
-local dragInput, dragStart, startPos
+local dragStart, startPos
 
 titleBar.InputBegan:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseButton1 then
 		dragging = true
 		dragStart = input.Position
 		startPos = frame.Position
-
-		input.Changed:Connect(function()
-			if input.UserInputState == Enum.UserInputState.End then
-				dragging = false
-			end
-		end)
 	end
 end)
 
 titleBar.InputChanged:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseMovement then
-		dragInput = input
-	end
-end)
-
-UIS.InputChanged:Connect(function(input)
-	if input == dragInput and dragging then
+	if input.UserInputType == Enum.UserInputType.MouseMovement and dragging then
 		local delta = input.Position - dragStart
-		frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
-		                           startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
 	end
 end)
 
--- Mesaj Label
-local label = Instance.new("TextLabel")
-label.Size = UDim2.new(1, -20, 1, -40)
-label.Position = UDim2.new(0, 10, 0, 35)
-label.BackgroundTransparency = 1
-label.TextColor3 = Color3.new(1, 1, 1)
-label.Font = Enum.Font.GothamBlack
-label.TextSize = 22
-label.TextWrapped = true
-label.TextXAlignment = Enum.TextXAlignment.Center
-label.TextYAlignment = Enum.TextYAlignment.Center
-label.Text = message
-label.Parent = frame
+game:GetService("UserInputService").InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
