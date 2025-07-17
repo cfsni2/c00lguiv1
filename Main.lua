@@ -10,7 +10,7 @@ local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0, 420, 0, 280)
 frame.Position = UDim2.new(0.5, -210, 0.5, -140)
 frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-frame.BorderSizePixel = 2
+frame.BorderSizePixel = 5 -- Daha kalın border
 frame.BorderColor3 = Color3.fromRGB(0, 255, 0)
 frame.ZIndex = 1
 frame.Active = true
@@ -54,7 +54,7 @@ closeButton.Position = UDim2.new(1, -35, 0, 0)
 closeButton.Text = "X"
 closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 closeButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-closeButton.BorderSizePixel = 0
+closeButton.BorderSizePixel = 0 -- Border yok
 closeButton.Font = Enum.Font.SourceSansBold
 closeButton.TextSize = 20
 closeButton.ZIndex = 4
@@ -70,13 +70,22 @@ local label = Instance.new("TextLabel")
 label.Size = UDim2.new(1, -20, 1, -40)
 label.Position = UDim2.new(0, 10, 0, 40)
 label.BackgroundTransparency = 1
-label.Text = "Merhaba, bu bir troll GUI'dir 😎"
 label.TextColor3 = Color3.fromRGB(255, 255, 255)
 label.TextWrapped = true
 label.Font = Enum.Font.SourceSans
 label.TextSize = 20
 label.ZIndex = 2
 label.Parent = frame
+
+-- Rastgele mesajlar
+local messages = {
+	"☠️ Sistem hatası... Siliniyor gibi yap...",
+	"🔥 Bu GUI'yi kapatırsan daha kötüsü olur!",
+	"😂 Ne bekliyordun? Gerçek mi sandın?",
+	"👀 Biri seni izliyor olabilir...",
+	"🧠 C00lGui? Daha çok TROLLGui!"
+}
+label.Text = messages[math.random(1, #messages)]
 
 -- Title bar’ı sürüklenebilir yap
 local dragging = false
