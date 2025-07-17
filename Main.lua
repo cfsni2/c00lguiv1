@@ -60,7 +60,7 @@ closeButton.TextSize = 20
 closeButton.ZIndex = 4
 closeButton.Parent = titleBar
 
--- Küçült/Geri Getir Butonu
+-- Minimize Butonu
 local minimizeButton = Instance.new("TextButton")
 minimizeButton.Size = UDim2.new(0, 30, 1, 0)
 minimizeButton.Position = UDim2.new(1, -70, 0, 0)
@@ -73,23 +73,24 @@ minimizeButton.TextSize = 20
 minimizeButton.ZIndex = 4
 minimizeButton.Parent = titleBar
 
--- Küçült/Genişlet İşlevi
+-- Minimize/Maximize işlemi
 local minimized = false
+local elementsToToggle = {label, greenLine, frame}
+
 minimizeButton.MouseButton1Click:Connect(function()
+	minimized = not minimized
+
 	if minimized then
-		-- Geri getir
-		frame.Size = UDim2.new(0, 420, 0, 280)
-		label.Visible = true
-		greenLine.Visible = true
-		minimizeButton.Text = "-"
-	else
-		-- Küçült
-		frame.Size = UDim2.new(0, 420, 0, 30)
 		label.Visible = false
 		greenLine.Visible = false
+		frame.Size = UDim2.new(0, 420, 0, 30)
 		minimizeButton.Text = "+"
+	else
+		label.Visible = true
+		greenLine.Visible = true
+		frame.Size = UDim2.new(0, 420, 0, 280)
+		minimizeButton.Text = "-"
 	end
-	minimized = not minimized
 end)
 
 -- Kapatma işlevi
